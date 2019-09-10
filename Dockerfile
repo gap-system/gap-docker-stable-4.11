@@ -7,7 +7,7 @@ ENV GAP_BRANCH=stable-4.11
 # download and build GAP
 RUN    mkdir /home/gap/inst/ \
     && cd /home/gap/inst/ \
-    && curl https://github.com/gap-system/gap/archive/${GAP_BRANCH}.tar.gz | tar xz \
+    && git clone --depth=1 -b ${GAP_BRANCH} https://github.com/gap-system/gap gap-${GAP_BRANCH} \
     && cd gap-${GAP_BRANCH} \
     && ./autogen.sh \
     && ./configure \
@@ -15,13 +15,13 @@ RUN    mkdir /home/gap/inst/ \
     && cp bin/gap.sh bin/gap
 
 # download and build GAP packages
-RUN    mkdir /home/gap/inst/pkg \
-    && cd /home/gap/inst/pkg \
+RUN    mkdir /home/gap/inst/gap-${GAP_BRANCH}/pkg \
+    && cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
     && curl https://www.gap-system.org/pub/gap/gap4pkgs/packages-${GAP_BRANCH}.tar.gz | tar xz \
     && ../bin/BuildPackages.sh
 
 # build JupyterKernel
-RUN    cd /home/gap/inst/pkg \
+RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
     && mv JupyterKernel-* JupyterKernel \
     && cd JupyterKernel \
     && python3 setup.py install --user
