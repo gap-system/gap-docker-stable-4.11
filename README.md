@@ -1,10 +1,13 @@
 # Docker container for GAP development version (stable-4.11 branch)
 
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/gap-system/gap-docker-stable-4.11/master)
+
 DockerHub entry: https://registry.hub.docker.com/u/gapsystem/gap-docker-stable-4.11/
 
 This container provides the core GAP system build from the `stable-4.11` branch
 of the [GAP repository](https://github.com/gap-system) and GAP packages
 prepared for the next release of GAP made from that branch.
+You can try it on mybinder.org via the "launch binder" badge above.
 
 If you have installed [Docker](https://www.docker.com/), to use this
 container first you need to download it using
